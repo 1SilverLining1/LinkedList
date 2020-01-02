@@ -1,0 +1,68 @@
+//https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1
+
+node * Reverse ( node* root , node* &head )
+{
+    if ( root -> next == NULL )
+    {
+        head = root ; 
+        return root ; 
+    }
+    
+    node * rev = Reverse ( root -> next , head ) ; 
+    rev-> next = root  ; 
+    root -> next = NULL ; 
+    return root ; 
+}
+struct node *reverse (struct node *head, int k)
+{ 
+        
+        if ( k == 1 ) 
+        	return head ; 
+        node * start  = head , *PrevHead = NULL , *next = NULL , *TempHead = NULL , *newhead = NULL ;  
+        int c = 1 ; 
+        while ( head )
+        {
+            //cout << head -> data << " " << c << endl ; 
+            ///cout << c << "***" << endl ; 
+            if ( c == k )
+            {
+                //cout << c << "&&&&&&" << endl ; 
+                next = head -> next ; 
+                head -> next = NULL ; 
+                Reverse ( start  , TempHead  ) ;
+                if ( PrevHead )
+                    PrevHead -> next =  TempHead ;
+                if ( newhead == NULL )
+                    newhead = TempHead  ; 
+                PrevHead = start  ; 
+                head = next ; 
+                //if ( head )
+                    //cout << head -> data << "^^^^" << endl ; 
+                c = 1 ; 
+                
+            }
+            else if ( c == 1 )
+            {
+                start  = head ;
+                c++ ;
+                head = head -> next ; 
+            }
+            else 
+            {
+                c ++ ;
+                head = head -> next ;
+            }
+        } 
+        //cout << c << "____" << endl ; 
+        if (  c!= 1  )
+        { 
+            //cout << c<< "((((" << endl ; 
+            Reverse ( start  , TempHead) ; 
+            if ( PrevHead )
+                    PrevHead -> next = TempHead ;
+            if ( newhead == NULL )
+                    newhead = TempHead  ; 
+        }
+        return newhead ; 
+    // Complete this method
+}
