@@ -1,0 +1,35 @@
+//https://leetcode.com/problems/palindrome-linked-list/
+
+
+class Solution {
+public:
+    
+    
+    void reverse ( ListNode * node , ListNode * &head , int &flag )
+    {
+          
+        if ( node == NULL )
+                return ; 
+
+        if ( node -> next == NULL )
+        {
+            //cout  << head -> val << " " << node -> val << endl ;
+            if ( head -> val != node -> val )
+                    flag = 0 ;
+            head = head -> next ; 
+            return ; 
+        }
+        reverse ( node -> next , head  , flag) ;
+        //cout  << head -> val << " " << node -> val << endl ; 
+        if ( node -> val != head -> val )
+            flag = 0 ; 
+        head = head -> next ;
+    }
+    bool isPalindrome(ListNode* head) {
+        
+        
+        int flag = 1 ; 
+        reverse ( head , head , flag ) ; 
+        return flag ; 
+    }
+};
