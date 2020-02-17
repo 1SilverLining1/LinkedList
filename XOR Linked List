@@ -1,0 +1,45 @@
+//https://practice.geeksforgeeks.org/problems/xor-linked-list/1
+
+
+void insert(struct Node **head_ref, int data)
+{
+    
+       	
+        Node* node = new Node ( data );
+        node -> npx = XOR ( NULL , *head_ref ) ; 
+        if ( *head_ref )
+                    (*head_ref )-> npx = XOR ( node , XOR ( NULL , (*head_ref)->npx ) ) ; 
+        *head_ref = node ; 
+	// Code here
+}
+
+// function should prints the contents of doubly linked list
+// first in forward direction and then in backward direction
+// you should print a next line after printing in forward direction
+void printList (struct Node *head)
+{
+    
+    Node * prev = NULL, *last = NULL  ; 
+    while ( head != NULL )
+    {
+        cout << head -> data <<" ";
+        Node * temp = head ; 
+        head = XOR ( prev , head -> npx ) ;
+        if ( head == NULL )
+            last = temp ; 
+        prev = temp ;
+    }
+    
+    cout << endl ; 
+    
+    prev = NULL ; 
+    while ( last != NULL)
+    {
+        cout << last -> data <<" ";
+        Node * temp = last ; 
+        last = XOR ( prev , last -> npx ) ;
+        prev = temp ;
+    }
+   // cout << endl ; 
+	// Code here
+}
