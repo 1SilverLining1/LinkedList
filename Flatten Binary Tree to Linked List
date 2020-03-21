@@ -1,0 +1,38 @@
+//https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
+
+
+class Solution {
+public:
+    
+    void util (TreeNode* root , TreeNode* parent  , stack < TreeNode* > right)
+    {
+        
+        if ( root == NULL )
+                return ; 
+        if ( root -> right ) 
+                right.push ( root -> right ) ;
+        
+        if ( parent )
+            parent -> right = root ;
+        
+        TreeNode * temp = root -> left ; 
+        root -> left = NULL ; 
+        parent = root ; 
+        if ( temp )
+            util ( temp , parent , right ) ; 
+        else if ( !right.empty() )
+        {
+            
+            temp = right.top();
+            right.pop() ;
+            util ( temp , parent , right ) ; 
+        }
+    }
+    void flatten(TreeNode* root) {
+        
+        
+        stack < TreeNode* > stk1 , stk2 ; 
+        util ( root ,  NULL, stk2 ) ;
+        
+    }
+};
